@@ -13,6 +13,7 @@ class MovieManager < Sinatra::Base
 
   get '/movies' do
     @movies = Movie.all
+    p @movies
     erb :index
   end
 

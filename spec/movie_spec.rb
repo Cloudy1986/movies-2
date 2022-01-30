@@ -10,10 +10,12 @@ describe Movie do
     connection.exec("INSERT INTO movies (title) VALUES ('Goodfellas');")
 
     movies = Movie.all
-
-    expect(movies[0]['title']).to include('The Godfather')
-    expect(movies[1]['title']).to include('Scarface')
-    expect(movies[2]['title']).to include('Goodfellas')
+    
+    expect(movies[0]).to be_a Movie
+    expect(movies.length).to eq 3
+    expect(movies[0].title).to eq 'The Godfather'
+    expect(movies[1].title).to eq 'Scarface'
+    expect(movies[2].title).to eq 'Goodfellas'
     end
   end
 
