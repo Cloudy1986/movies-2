@@ -1,5 +1,6 @@
 require 'sinatra/base'
 require 'sinatra/reloader'
+require './lib/movie'
 
 class MovieManager < Sinatra::Base
   configure :development do
@@ -11,6 +12,7 @@ class MovieManager < Sinatra::Base
   end
 
   get '/movies' do
+    @movies = Movie.all
     erb :index
   end
 
