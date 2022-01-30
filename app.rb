@@ -10,5 +10,9 @@ class MovieManager < Sinatra::Base
     erb :homepage
   end
 
+  get '/movies' do
+    erb :index
+  end
+
   run! if app_file == $0
 end
