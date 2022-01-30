@@ -5,9 +5,9 @@ describe Movie do
   describe '.all' do
     it 'returns movie list' do
     movies = Movie.all
-    expect(movies).to include('The Godfather')
-    expect(movies).to include('Scarface')
-    expect(movies).to include('Goodfellas')
+    expect(movies[0]['title']).to include('The Godfather')
+    expect(movies[1]['title']).to include('Scarface')
+    expect(movies[2]['title']).to include('Goodfellas')
     end
   end
 
