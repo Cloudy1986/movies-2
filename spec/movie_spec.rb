@@ -19,4 +19,17 @@ describe Movie do
     end
   end
 
+  describe '.create' do
+    it 'adds a movie to the database' do
+      movie = Movie.create(title: 'Platoon')
+      
+      connection = PG.connect(dbname: 'movie_database_test')
+      result = connection.query("SELECT * FROM movies WHERE id = #{movie.id};")
+      
+      expect(movie).to be_a Movie
+      expect(movie.id).to eq result[0]['id']
+      expect(movie.title).to eq result[0]['title']
+    end
+  end
+
 end

@@ -16,5 +16,14 @@ class MovieManager < Sinatra::Base
     erb :index
   end
 
+  get '/movies/new' do
+    erb :new
+  end
+
+  post '/movies' do
+    Movie.create(title: params['title'])
+    redirect '/movies'
+  end
+
   run! if app_file == $0
 end

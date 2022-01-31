@@ -21,4 +21,14 @@ class Movie
     end
   end
 
+  def self.create(title:)
+    if ENV['ENVIRONMENT'] == 'test'
+      connection = PG.connect(dbname: 'movie_database_test')
+    else
+      connection = PG.connect(dbname: 'movie_database')
+    end
+    result = connection.exec("INSERT INTO movies (title) VALUES ($1) RETURNING id, title;", [title])
+    Movie.new(id: result[0]['id'], title: result[0]['title'])
+  end
+
 end
