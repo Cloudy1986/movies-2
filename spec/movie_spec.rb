@@ -32,4 +32,13 @@ describe Movie do
     end
   end
 
+  describe '.delete' do
+    it 'deletes a movie from the database' do
+      movie = Movie.create(title: 'The Dark Knight')
+      Movie.delete(id: movie.id)
+      movies = Movie.all
+      expect(movies.length).to eq 0
+    end
+  end
+
 end

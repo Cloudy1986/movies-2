@@ -31,4 +31,13 @@ class Movie
     Movie.new(id: result[0]['id'], title: result[0]['title'])
   end
 
+  def self.delete(id:)
+    if ENV['ENVIRONMENT'] == 'test'
+      connection = PG.connect(dbname: 'movie_database_test')
+    else
+      connection = PG.connect(dbname: 'movie_database')
+    end
+    result = connection.exec_params("DELETE FROM movies WHERE id = $1;", [id])
+  end
+
 end

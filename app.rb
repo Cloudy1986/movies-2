@@ -7,6 +7,8 @@ class MovieManager < Sinatra::Base
     register Sinatra::Reloader
   end
 
+  enable :sessions, :method_override
+
   get '/' do
     erb :homepage
   end
@@ -22,6 +24,11 @@ class MovieManager < Sinatra::Base
 
   post '/movies' do
     Movie.create(title: params['title'])
+    redirect '/movies'
+  end
+
+  delete '/movies/:id' do
+    Movie.delete(id: params['id'])
     redirect '/movies'
   end
 
