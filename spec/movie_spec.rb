@@ -53,4 +53,16 @@ describe Movie do
     end
   end
 
+  describe '.update' do
+    it 'updates the title of the correct movie' do
+      movie = Movie.create(title: 'Thor')
+      updated_movie = Movie.update(id: movie.id, title: 'Ironman')
+
+      expect(updated_movie).to be_a Movie
+      expect(updated_movie.id).to eq movie.id
+      expect(updated_movie.title).to eq 'Ironman'
+
+    end
+  end
+
 end
