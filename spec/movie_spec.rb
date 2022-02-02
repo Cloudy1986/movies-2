@@ -37,7 +37,19 @@ describe Movie do
       movie = Movie.create(title: 'The Dark Knight')
       Movie.delete(id: movie.id)
       movies = Movie.all
+
       expect(movies.length).to eq 0
+    end
+  end
+
+  describe '.find' do
+    it 'returns the movie with the correct id' do
+      movie = Movie.create(title: 'Spiderman')
+      returned_movie = Movie.find(id: movie.id)
+
+      expect(returned_movie).to be_a Movie
+      expect(returned_movie.id).to eq movie.id
+      expect(returned_movie.title).to eq movie.title
     end
   end
 

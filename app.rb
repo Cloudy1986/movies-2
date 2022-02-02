@@ -32,5 +32,11 @@ class MovieManager < Sinatra::Base
     redirect '/movies'
   end
 
+  get '/movies/:id/edit' do
+    p params['id']
+    @movie = Movie.find(id: params['id'])
+    erb :edit
+  end
+
   run! if app_file == $0
 end
