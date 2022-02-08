@@ -15,11 +15,11 @@ class MovieManager < Sinatra::Base
 
   get '/movies' do
     @movies = Movie.all
-    erb :index
+    erb :'movies/index'
   end
 
   get '/movies/new' do
-    erb :new
+    erb :'movies/new'
   end
 
   post '/movies' do
@@ -34,11 +34,22 @@ class MovieManager < Sinatra::Base
 
   get '/movies/:id/edit' do
     @movie = Movie.find(id: params['id'])
-    erb :edit
+    erb :'movies/edit'
   end
 
   patch '/movies/:id' do
     Movie.update(id: params['id'], title: params['title'])
+    redirect '/movies'
+  end
+
+  get '/movies/:id/comment/new' do
+    @movie = Movie.find(id: params['id'])
+    erb :'comments/new'
+  end
+
+  post '/movies/:id/comment' do
+    p params['comment_text']
+    p params['id'] #id for movie
     redirect '/movies'
   end
 
