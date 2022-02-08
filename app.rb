@@ -50,6 +50,8 @@ class MovieManager < Sinatra::Base
   post '/movies/:id/comment' do
     p params['comment_text']
     p params['id'] #id for movie
+    # Add the comment to the database
+    # Comment.create(text: params['comment_text'] movie_id: params['id'])
     redirect '/movies'
   end
 
