@@ -16,6 +16,9 @@
     <form action="/movies/<%= movie.id %>/comment/new" method="get">
       <input type="submit" value="Add comment">
     </form>
+    <form action="/movies/<%= movie.id %>/comments" method="get">
+      <input type="submit" value="View comments">
+    </form>
   </ul>
   <% end %>
 </ul>
