@@ -50,7 +50,13 @@ class MovieManager < Sinatra::Base
 
   post '/movies/:id/comment' do
     Comment.create(text: params['comment_text'], movie_id: params['id'])
-    redirect '/movies'
+    redirect "/movies/#{params['id']}/comments"
+  end
+
+  get '/movies/:id/comments' do
+    @movie = Movie.find(id: params['id'])
+    @comments = Comment.where(movie_id: params['id'])
+    erb :'/comments/index'
   end
 
   run! if app_file == $0
