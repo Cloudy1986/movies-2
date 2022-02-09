@@ -1,6 +1,4 @@
-<h1>Comments</h1>
-
-<h2><%= @movie.title %></h2>
+<h1>Comments for '<%= @movie.title %>'</h1>
 
 <% @comments.each do |comment| %>
   <li><%= comment.text %></li>
