@@ -4,18 +4,13 @@ describe Comment do
   
   describe '.create' do
     it 'adds a comment to the database' do
-      #Arrange
       movie = Movie.create(title: 'This is a test title')
-      p movie
-      #Act
+
       comment = Comment.create(text: 'This is text for a comment', movie_id: movie.id)
-      p comment[0]
 
       test_connection = PG.connect(dbname: 'movie_database_test')
       test_result = test_connection.exec_params('SELECT * FROM comments WHERE movie_id = $1;', [movie.id])
-      p test_result[0]
-
-      #Assert
+      
       expect(comment).to be_a Comment
       expect(comment.text).to eq 'This is text for a comment'
       expect(comment.movie_id).to eq movie.id

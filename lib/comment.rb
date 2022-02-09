@@ -1,5 +1,13 @@
 class Comment
 
+  attr_reader :id, :text, :movie_id
+
+  def initialize(id:, text:, movie_id: )
+    @id = id
+    @text = text
+    @movie_id = movie_id
+  end
+
   def self.create(text:, movie_id:)
     if ENV['ENVIRONMENT'] == 'test'
       connection = PG.connect(dbname: 'movie_database_test')
@@ -7,7 +15,7 @@ class Comment
       connection = PG.connect(dbname: 'movie_database')
     end
     result = connection.exec_params("INSERT INTO comments (text, movie_id) VALUES ($1, $2) RETURNING id, text, movie_id;", [text, movie_id])
-    # Will need to create a new comment here e.g Comment.new(id: title: movie:)
+    Comment.new(id: result[0]['id'], text: result[0]['text'], movie_id: result[0]['movie_id'])
   end
 
 end

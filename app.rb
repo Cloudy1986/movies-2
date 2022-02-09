@@ -1,6 +1,7 @@
 require 'sinatra/base'
 require 'sinatra/reloader'
 require './lib/movie'
+require './lib/comment'
 
 class MovieManager < Sinatra::Base
   configure :development do
@@ -48,10 +49,7 @@ class MovieManager < Sinatra::Base
   end
 
   post '/movies/:id/comment' do
-    # p params['comment_text']
-    # p params['id'] #id for movie
-    # Add the comment to the database
-    # Comment.create(text: params['comment_text'] movie_id: params['id'])
+    Comment.create(text: params['comment_text'], movie_id: params['id'])
     redirect '/movies'
   end
 
